@@ -6,3 +6,9 @@
 - [ ] Salvar um checkpoint.
 - [x] Liberar o host seguro da prévia na configuração do Vite.
 - [x] Confirmar o carregamento da prévia na interface.
+- [x] Ajustar identidade e ações do cabeçalho.
+- [x] Destacar o aviso de maioridade na seção hero.
+- [x] Atualizar os textos institucionais e de serviços solicitados.
+- [x] Configurar os links externos de Instagram e WhatsApp.
+- [x] Validar a prévia atualizada.
+- [ ] Salvar o checkpoint revisado.
