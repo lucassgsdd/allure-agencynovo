@@ -39,3 +39,9 @@
 - [x] Tornar o card da Lara Luisa um link externo seguro.
 - [x] Validar build, comportamento de scroll e prévia.
 - [ ] Salvar a revisão com ScrollReveal e card clicável.
+- [x] Remover todos os wrappers, imports e usos atuais de animação.
+- [x] Confirmar a página estática antes de reconstruir o efeito.
+- [x] Criar o ScrollReveal blindado com offset 0–0,6 e deslocamento de 60px.
+- [x] Aplicar o novo ScrollReveal a Sobre, Serviços, Responsáveis e aviso 18+.
+- [x] Validar o build e a prévia da animação isolada.
+- [ ] Salvar a revisão isolada.

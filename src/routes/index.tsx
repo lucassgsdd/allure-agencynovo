@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { AnimatedLandingPage } from "@/components/AnimatedLandingPage";
+import { AllureLandingPage } from "@/components/AllureLandingPage";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -107,5 +107,5 @@ function Index() {
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
-  return <AnimatedLandingPage />;
+  return <AllureLandingPage />;
 }
