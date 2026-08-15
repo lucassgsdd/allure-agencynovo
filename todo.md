@@ -29,3 +29,8 @@
 - [x] Desacelerar a cascata da lista de serviços.
 - [x] Validar a composição e a compilação da revisão cinematográfica.
 - [ ] Salvar a revisão cinematográfica.
+- [x] Criar um wrapper reutilizável para Scroll Scrubbing com useScroll e useTransform.
+- [x] Remover triggers initial, whileInView, viewport e transition dos elementos revelados.
+- [x] Vincular Hero, Sobre e Serviços ao progresso contínuo do scroll.
+- [x] Validar a prévia, o rewind via progresso reversível e a compilação.
+- [ ] Salvar a revisão Scroll Scrubbing.

@@ -1,5 +1,6 @@
-// Allure Agency motion system: editorial-luxury reveals with a restrained cinematic cadence.
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+// Allure Agency motion system: scroll-linked editorial reveals with proportional rewind.
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef, type ReactNode } from "react";
 import { allureHtml } from "@/lib/allure-html";
 
 type ElementSlice = {
@@ -10,9 +11,6 @@ type ElementSlice = {
   className: string;
   id?: string;
 };
-
-const premiumEase = [0.25, 0.1, 0.25, 1] as const;
-const viewport = { once: false, amount: 0.2 } as const;
 
 function readAttribute(opening: string, name: string): string | undefined {
   return opening.match(new RegExp(`${name}="([^"]*)"`, "i"))?.[1];
@@ -105,86 +103,86 @@ function Html({ content }: { content: string }) {
   return <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: content }} />;
 }
 
-function RawSection({ section }: { section: ElementSlice }) {
-  return (
-    <section className={section.className} id={section.id} dangerouslySetInnerHTML={{ __html: section.inner }} />
-  );
-}
+type RevealTag = "div" | "section" | "article" | "h1" | "h2" | "p" | "nav" | "span";
 
-function AnimatedSection({ section }: { section: ElementSlice }) {
+const motionElements = {
+  div: motion.div,
+  section: motion.section,
+  article: motion.article,
+  h1: motion.h1,
+  h2: motion.h2,
+  p: motion.p,
+  nav: motion.nav,
+  span: motion.span,
+} as const;
+
+type ScrollLinkedRevealProps = {
+  as?: RevealTag;
+  className?: string;
+  id?: string;
+  children?: ReactNode;
+  html?: string;
+  distance?: number;
+  ariaLabel?: string;
+};
+
+function ScrollLinkedReveal({
+  as = "div",
+  className,
+  id,
+  children,
+  html,
+  distance = 90,
+  ariaLabel,
+}: ScrollLinkedRevealProps) {
+  const targetRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start bottom", "center center"],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [distance, 0]);
+  const Element = motionElements[as] as typeof motion.div;
+
   return (
-    <motion.section
-      className={section.className}
-      id={section.id}
-      initial={reduceMotion ? false : { opacity: 0, y: 90 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewport}
-      transition={{ duration: 1.3, ease: premiumEase }}
-      dangerouslySetInnerHTML={{ __html: section.inner }}
-    />
+    <Element
+      ref={targetRef as never}
+      className={className}
+      id={id}
+      aria-label={ariaLabel}
+      style={reduceMotion ? { opacity: 1, y: 0 } : { opacity, y }}
+      {...(html ? { dangerouslySetInnerHTML: { __html: html } } : {})}
+    >
+      {html ? null : children}
+    </Element>
   );
 }
 
 export function AnimatedLandingPage() {
-  const reduceMotion = useReducedMotion();
-
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 90 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1.3, ease: premiumEase } },
-  };
-  const serviceContainer: Variants = {
-    hidden: {},
-    visible: { transition: { delayChildren: 0.16, staggerChildren: 0.48 } },
-  };
-  const serviceItem: Variants = {
-    hidden: { opacity: 0, y: 80 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1.25, ease: premiumEase } },
-  };
-  const ceoContainer: Variants = {
-    hidden: {},
-    visible: { transition: { delayChildren: 0.18, staggerChildren: 0.3 } },
-  };
-  const ceoCard: Variants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1.3, ease: premiumEase } },
-  };
-
-  const initialLoad = reduceMotion ? false : { opacity: 0, y: -80 };
-  const initialHeroTitle = reduceMotion ? false : { opacity: 0, y: 100 };
-  const initialAgeNotice = reduceMotion ? false : { opacity: 0, y: 80 };
-
   return (
     <main className="allure-page">
       <section className={hero.className} id={hero.id}>
         <div className={heroPhoto.className} aria-hidden="true" />
         <div className={heroShade.className} aria-hidden="true" />
-        <motion.nav
+        <ScrollLinkedReveal
+          as="nav"
           className={heroNav.className}
           aria-label="Navegação principal"
-          initial={initialLoad}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.25, ease: premiumEase }}
-          dangerouslySetInnerHTML={{ __html: heroNav.inner }}
+          distance={80}
+          html={heroNav.inner}
         />
         <div className={heroContent.className}>
           <Html content={heroBeforeTitle} />
-          <motion.h1
-            initial={initialHeroTitle}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, delay: 0.16, ease: premiumEase }}
-            dangerouslySetInnerHTML={{ __html: heroTitle.inner }}
+          <ScrollLinkedReveal
+            as="h1"
+            className={heroTitle.className}
+            distance={100}
+            html={heroTitle.inner}
           />
           <Html content={heroAfterTitle} />
         </div>
-        <p className={heroAgeNotice.className}>
-          <motion.span
-            initial={initialAgeNotice}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.25, delay: 0.5, ease: premiumEase }}
-            dangerouslySetInnerHTML={{ __html: heroAgeNotice.inner }}
-          />
-        </p>
+        <ScrollLinkedReveal as="p" className={heroAgeNotice.className} distance={80} html={heroAgeNotice.inner} />
         <a
           className={scrollCue.className}
           href="#sobre"
@@ -193,85 +191,72 @@ export function AnimatedLandingPage() {
         />
       </section>
 
-      <AnimatedSection section={about} />
+      <ScrollLinkedReveal as="section" className={about.className} id={about.id} distance={100} html={about.inner} />
 
-      <motion.section className={services.className} id={services.id}>
-        <motion.div
+      <section className={services.className} id={services.id}>
+        <ScrollLinkedReveal
+          as="div"
           className={servicesHeading.className}
-          initial={reduceMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          dangerouslySetInnerHTML={{ __html: servicesHeading.inner }}
+          distance={100}
+          html={servicesHeading.inner}
         />
-        <motion.div
-          className={serviceList.className}
-          initial={reduceMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={viewport}
-          variants={serviceContainer}
-        >
+        <div className={serviceList.className}>
           {serviceItems.map((item, index) => (
-            <motion.article
+            <ScrollLinkedReveal
+              as="article"
               className={item.className}
               key={`service-${index}`}
-              variants={serviceItem}
-              dangerouslySetInnerHTML={{ __html: item.inner }}
+              distance={80}
+              html={item.inner}
             />
           ))}
-        </motion.div>
+        </div>
         <div className={servicesCta.className} dangerouslySetInnerHTML={{ __html: servicesCta.inner }} />
-      </motion.section>
+      </section>
 
-      <AnimatedSection section={processSection} />
+      <ScrollLinkedReveal
+        as="section"
+        className={processSection.className}
+        id={processSection.id}
+        distance={100}
+        html={processSection.inner}
+      />
 
-      <motion.section className={proof.className} id={proof.id}>
-        <motion.div
+      <section className={proof.className} id={proof.id}>
+        <ScrollLinkedReveal
+          as="div"
           className={proofLabel.className}
-          initial={reduceMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          dangerouslySetInnerHTML={{ __html: proofLabel.inner }}
+          distance={80}
+          html={proofLabel.inner}
         />
         <div className={ceosWrap.className}>
-          <motion.h2
+          <ScrollLinkedReveal
+            as="h2"
             className={ceosTitle.className}
-            initial={reduceMotion ? false : "hidden"}
-            whileInView="visible"
-            viewport={viewport}
-            variants={fadeUp}
-            dangerouslySetInnerHTML={{ __html: ceosTitle.inner }}
+            distance={100}
+            html={ceosTitle.inner}
           />
-          <motion.p
+          <ScrollLinkedReveal
+            as="p"
             className={ceosLead.className}
-            initial={reduceMotion ? false : "hidden"}
-            whileInView="visible"
-            viewport={viewport}
-            variants={fadeUp}
-            transition={{ duration: 1.3, delay: 0.16, ease: premiumEase }}
-            dangerouslySetInnerHTML={{ __html: ceosLead.inner }}
+            distance={80}
+            html={ceosLead.inner}
           />
-          <motion.div
-            className={ceosGrid.className}
-            initial={reduceMotion ? false : "hidden"}
-            whileInView="visible"
-            viewport={viewport}
-            variants={ceoContainer}
-          >
+          <div className={ceosGrid.className}>
             {ceoCards.map((card, index) => (
-              <motion.article
+              <ScrollLinkedReveal
+                as="article"
                 className={card.className}
                 key={`ceo-${index}`}
-                variants={ceoCard}
-                dangerouslySetInnerHTML={{ __html: card.inner }}
+                distance={80}
+                html={card.inner}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      <AnimatedSection section={contact} />
+      <ScrollLinkedReveal as="section" className={contact.className} id={contact.id} distance={100} html={contact.inner} />
       <footer className={footer.className} dangerouslySetInnerHTML={{ __html: footer.inner }} />
     </main>
   );
