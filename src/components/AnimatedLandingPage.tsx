@@ -11,8 +11,8 @@ type ElementSlice = {
   id?: string;
 };
 
-const premiumEase = [0.22, 1, 0.36, 1] as const;
-const viewport = { once: true, amount: 0.2 } as const;
+const premiumEase = [0.25, 0.1, 0.25, 1] as const;
+const viewport = { once: false, amount: 0.2 } as const;
 
 function readAttribute(opening: string, name: string): string | undefined {
   return opening.match(new RegExp(`${name}="([^"]*)"`, "i"))?.[1];
@@ -117,10 +117,10 @@ function AnimatedSection({ section }: { section: ElementSlice }) {
     <motion.section
       className={section.className}
       id={section.id}
-      initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 90 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={viewport}
-      transition={{ duration: 0.72, ease: premiumEase }}
+      transition={{ duration: 1.3, ease: premiumEase }}
       dangerouslySetInnerHTML={{ __html: section.inner }}
     />
   );
@@ -130,29 +130,29 @@ export function AnimatedLandingPage() {
   const reduceMotion = useReducedMotion();
 
   const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.72, ease: premiumEase } },
+    hidden: { opacity: 0, y: 90 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.3, ease: premiumEase } },
   };
   const serviceContainer: Variants = {
     hidden: {},
-    visible: { transition: { delayChildren: 0.04, staggerChildren: 0.15 } },
+    visible: { transition: { delayChildren: 0.16, staggerChildren: 0.48 } },
   };
   const serviceItem: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.68, ease: premiumEase } },
+    hidden: { opacity: 0, y: 80 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.25, ease: premiumEase } },
   };
   const ceoContainer: Variants = {
     hidden: {},
-    visible: { transition: { delayChildren: 0.08, staggerChildren: 0.16 } },
+    visible: { transition: { delayChildren: 0.18, staggerChildren: 0.3 } },
   };
   const ceoCard: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.72, ease: premiumEase } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1.3, ease: premiumEase } },
   };
 
-  const initialLoad = reduceMotion ? false : { opacity: 0, y: -20 };
-  const initialHeroTitle = reduceMotion ? false : { opacity: 0, y: 30 };
-  const initialAgeNotice = reduceMotion ? false : { opacity: 0, y: 16 };
+  const initialLoad = reduceMotion ? false : { opacity: 0, y: -80 };
+  const initialHeroTitle = reduceMotion ? false : { opacity: 0, y: 100 };
+  const initialAgeNotice = reduceMotion ? false : { opacity: 0, y: 80 };
 
   return (
     <main className="allure-page">
@@ -164,7 +164,7 @@ export function AnimatedLandingPage() {
           aria-label="Navegação principal"
           initial={initialLoad}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.68, ease: premiumEase }}
+          transition={{ duration: 1.25, ease: premiumEase }}
           dangerouslySetInnerHTML={{ __html: heroNav.inner }}
         />
         <div className={heroContent.className}>
@@ -172,7 +172,7 @@ export function AnimatedLandingPage() {
           <motion.h1
             initial={initialHeroTitle}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.78, delay: 0.14, ease: premiumEase }}
+            transition={{ duration: 1.4, delay: 0.16, ease: premiumEase }}
             dangerouslySetInnerHTML={{ __html: heroTitle.inner }}
           />
           <Html content={heroAfterTitle} />
@@ -181,7 +181,7 @@ export function AnimatedLandingPage() {
           <motion.span
             initial={initialAgeNotice}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.68, delay: 0.5, ease: premiumEase }}
+            transition={{ duration: 1.25, delay: 0.5, ease: premiumEase }}
             dangerouslySetInnerHTML={{ __html: heroAgeNotice.inner }}
           />
         </p>
@@ -249,7 +249,7 @@ export function AnimatedLandingPage() {
             whileInView="visible"
             viewport={viewport}
             variants={fadeUp}
-            transition={{ delay: 0.08 }}
+            transition={{ duration: 1.3, delay: 0.16, ease: premiumEase }}
             dangerouslySetInnerHTML={{ __html: ceosLead.inner }}
           />
           <motion.div

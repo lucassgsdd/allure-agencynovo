@@ -24,3 +24,8 @@
 - [x] Aplicar entradas premium, scroll reveal e cascata de serviços.
 - [x] Validar animações, prévia e compilação.
 - [ ] Salvar a versão animada.
+- [x] Atualizar viewport para replay contínuo das revelações.
+- [x] Aumentar distância, duração e suavidade de todas as transições.
+- [x] Desacelerar a cascata da lista de serviços.
+- [x] Validar a composição e a compilação da revisão cinematográfica.
+- [ ] Salvar a revisão cinematográfica.
