@@ -19,3 +19,8 @@
 - [x] Intensificar a animação e o destaque visual do aviso 18+.
 - [x] Validar a nova pulsação na prévia.
 - [ ] Salvar a revisão com o aviso reforçado.
+- [x] Verificar e preparar a dependência Framer Motion.
+- [x] Refatorar a página em componentes animáveis.
+- [x] Aplicar entradas premium, scroll reveal e cascata de serviços.
+- [x] Validar animações, prévia e compilação.
+- [ ] Salvar a versão animada.
