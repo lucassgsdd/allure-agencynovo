@@ -1,6 +1,7 @@
 // Allure Agency motion system: scroll-linked editorial reveals with proportional rewind.
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef, type ReactNode } from "react";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { allureHtml } from "@/lib/allure-html";
 
 type ElementSlice = {
@@ -174,12 +175,9 @@ export function AnimatedLandingPage() {
         />
         <div className={heroContent.className}>
           <Html content={heroBeforeTitle} />
-          <ScrollLinkedReveal
-            as="h1"
-            className={heroTitle.className}
-            distance={100}
-            html={heroTitle.inner}
-          />
+          <ScrollReveal>
+            <h1 className={heroTitle.className} dangerouslySetInnerHTML={{ __html: heroTitle.inner }} />
+          </ScrollReveal>
           <Html content={heroAfterTitle} />
         </div>
         <ScrollLinkedReveal as="p" className={heroAgeNotice.className} distance={80} html={heroAgeNotice.inner} />
@@ -191,24 +189,19 @@ export function AnimatedLandingPage() {
         />
       </section>
 
-      <ScrollLinkedReveal as="section" className={about.className} id={about.id} distance={100} html={about.inner} />
+      <ScrollReveal>
+        <section className={about.className} id={about.id} dangerouslySetInnerHTML={{ __html: about.inner }} />
+      </ScrollReveal>
 
       <section className={services.className} id={services.id}>
-        <ScrollLinkedReveal
-          as="div"
-          className={servicesHeading.className}
-          distance={100}
-          html={servicesHeading.inner}
-        />
+        <ScrollReveal>
+          <div className={servicesHeading.className} dangerouslySetInnerHTML={{ __html: servicesHeading.inner }} />
+        </ScrollReveal>
         <div className={serviceList.className}>
           {serviceItems.map((item, index) => (
-            <ScrollLinkedReveal
-              as="article"
-              className={item.className}
-              key={`service-${index}`}
-              distance={80}
-              html={item.inner}
-            />
+            <ScrollReveal key={`service-${index}`}>
+              <article className={item.className} dangerouslySetInnerHTML={{ __html: item.inner }} />
+            </ScrollReveal>
           ))}
         </div>
         <div className={servicesCta.className} dangerouslySetInnerHTML={{ __html: servicesCta.inner }} />
@@ -244,13 +237,24 @@ export function AnimatedLandingPage() {
           />
           <div className={ceosGrid.className}>
             {ceoCards.map((card, index) => (
-              <ScrollLinkedReveal
-                as="article"
-                className={card.className}
-                key={`ceo-${index}`}
-                distance={80}
-                html={card.inner}
-              />
+              <ScrollLinkedReveal as="article" className={card.className} key={`ceo-${index}`} distance={80}>
+                {card.inner.includes("Lara Luisa") ? (
+                  <a
+                    href="https://lara-five-pi.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Conheça Lara Luisa"
+                    style={{ display: "block", color: "inherit", textDecoration: "none" }}
+                    dangerouslySetInnerHTML={{
+                      __html: card.inner
+                        .replace(/<a\b[^>]*class="([^"]*ceo-btn[^"]*)"[^>]*>/i, '<span class="$1">')
+                        .replace("</a>", "</span>"),
+                    }}
+                  />
+                ) : (
+                  <div dangerouslySetInnerHTML={{ __html: card.inner }} />
+                )}
+              </ScrollLinkedReveal>
             ))}
           </div>
         </div>

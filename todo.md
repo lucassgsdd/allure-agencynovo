@@ -34,3 +34,8 @@
 - [x] Vincular Hero, Sobre e Serviços ao progresso contínuo do scroll.
 - [x] Validar a prévia, o rewind via progresso reversível e a compilação.
 - [ ] Salvar a revisão Scroll Scrubbing.
+- [x] Criar o componente ScrollReveal com o código fornecido.
+- [x] Aplicar ScrollReveal aos títulos, textos de Sobre e itens de serviço.
+- [x] Tornar o card da Lara Luisa um link externo seguro.
+- [x] Validar build, comportamento de scroll e prévia.
+- [ ] Salvar a revisão com ScrollReveal e card clicável.
