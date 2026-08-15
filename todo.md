@@ -1,0 +1,6 @@
+- [x] Guardar cópias das imagens hero originais fora do repositório de trabalho.
+- [x] Enviar as imagens hero ao armazenamento gerenciado do projeto.
+- [x] Confirmar que as imagens acima do limite não eram referenciadas pela página.
+- [x] Remover cópias locais acima do limite e artefatos de compilação regeneráveis.
+- [x] Compilar e conferir a prévia após a limpeza.
+- [ ] Salvar um checkpoint.

@@ -1,0 +1,34 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "https://7f0548f6b28a1758d9bf7be630d36cb4.artifacts.cloudflare.net/git/prod/SL2idwCHi94WXwBjBnb7jz.git",
+    "expiration": "2026-08-16T07:09:17.675Z",
+    "token": "art_v2_x_bf378135285ee5b368578ba4abe2a3f6ce142c76?expires=1786864157",
+    "backend": "GIT_BACKEND_ARTIFACTS"
+  },
+  "name": "allure-agency",
+  "path": "/home/ubuntu/allure-agency",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "6kndCSxLQBVQsZpJrVFL4v",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "iHzTWHombGWPJqwZNMDetP",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Lucas Ferreira",
+    "OWNER_OPEN_ID": "cFmxTjpw4gUAPJc87fTn2x",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "33fc5bec-8c2b-4784-8d99-b2f7e7524818",
+    "VITE_APP_ID": "SL2idwCHi94WXwBjBnb7jz",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "Allure Agency",
+    "VITE_FRONTEND_FORGE_API_KEY": "d6RnAZrf6KYyyxyNVMkL7w",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
