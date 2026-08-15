@@ -4,3 +4,5 @@
 - [x] Remover cópias locais acima do limite e artefatos de compilação regeneráveis.
 - [x] Compilar e conferir a prévia após a limpeza.
 - [ ] Salvar um checkpoint.
+- [x] Liberar o host seguro da prévia na configuração do Vite.
+- [x] Confirmar o carregamento da prévia na interface.
