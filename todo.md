@@ -12,3 +12,7 @@
 - [x] Configurar os links externos de Instagram e WhatsApp.
 - [x] Validar a prévia atualizada.
 - [ ] Salvar o checkpoint revisado.
+- [x] Alterar o título do item 04 para Suporte Jurídico.
+- [x] Confirmar as plataformas do item 01 e a animação do aviso 18+.
+- [x] Validar a prévia atualizada.
+- [ ] Salvar a revisão.
