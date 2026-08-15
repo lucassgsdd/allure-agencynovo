@@ -98,3 +98,6 @@
 
 /* Allure Agency — ajustes solicitados: identidade do cabeçalho e aviso de maioridade. */
 .site-nav .nav-wordmark{font-size:1.15rem;font-weight:700;letter-spacing:.24em;transform:scale(1.05);transform-origin:left center}.site-nav .nav-wordmark .brand-mark-img{width:1.2rem;height:1.2rem}.hero-side-note.age-notice-glow{color:#fff4cf;opacity:1;font-weight:600;text-shadow:0 0 10px #f3c95766;animation:allure-age-notice 3.2s ease-in-out infinite}@keyframes allure-age-notice{0%,100%{opacity:.8;text-shadow:0 0 8px #f3c95752}50%{opacity:1;text-shadow:0 0 14px #f3c957a8}}
+
+/* Allure Agency — aviso de maioridade com presença reforçada. */
+.hero-side-note.age-notice-glow{color:#fff8dd!important;opacity:1!important;font-size:.64rem;font-weight:700;letter-spacing:.16em;padding:.55rem .7rem;border-left:1px solid #f1cc68;background:linear-gradient(90deg,#0b0b0bb3,#0b0b0b18);text-shadow:0 0 12px #f5cc678c;transform-origin:right center;animation:allure-age-notice-attention 1.15s cubic-bezier(.4,0,.2,1) infinite!important}@keyframes allure-age-notice-attention{0%,100%{opacity:.38;transform:scale(.96);filter:brightness(.85);text-shadow:0 0 4px #f5cc674d}48%{opacity:1;transform:scale(1.05);filter:brightness(1.28);text-shadow:0 0 19px #f5cc67d9}}

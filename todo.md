@@ -16,3 +16,6 @@
 - [x] Confirmar as plataformas do item 01 e a animação do aviso 18+.
 - [x] Validar a prévia atualizada.
 - [ ] Salvar a revisão.
+- [x] Intensificar a animação e o destaque visual do aviso 18+.
+- [x] Validar a nova pulsação na prévia.
+- [ ] Salvar a revisão com o aviso reforçado.
