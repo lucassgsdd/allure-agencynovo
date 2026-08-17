@@ -12,6 +12,10 @@ export default defineConfig({
       allowedHosts: ["8080-il3u3c0z3xvej9pkylpox-b23e0a69.us3.manus.computer"],
     },
   },
+  nitro: {
+    // Generate the production output for Vercel instead of relying on platform detection.
+    preset: "vercel",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
